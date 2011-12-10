@@ -15,7 +15,7 @@ public class HeatpumpRegistryTest {
 	
 	@Test
 	public void shouldReturnSameInstanceOfMainClass() throws Exception {
-		HeatpumpRegistry.registe rMainClass(HeatpumpInteractorFake.class);
+		HeatpumpRegistry.registerMainClass(HeatpumpInteractorFake.class);
 		HeatpumpInteractor firstInterractor = HeatpumpRegistry.getInteractor();
 		HeatpumpInteractor secondInterractor = HeatpumpRegistry.getInteractor();
 		assertSame(secondInterractor, firstInterractor);

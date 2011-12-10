@@ -5,10 +5,10 @@ import java.lang.reflect.InvocationTargetException;
 public class HeatpumpRegistry {
 
 	private static HeatpumpRegistry instance = new HeatpumpRegistry();
-	private static Class mainClass;
+	private Class<? extends HeatpumpInteractor> mainClass;
 
-	public static Class getMainClass() {
-		return mainClass;
+	public static Class<? extends HeatpumpInteractor> getMainClass() {
+		return getInstance().mainClass;
 	}
 
 	public static void registerMainClass(Class<? extends HeatpumpInteractor> mainClass) {
@@ -23,9 +23,8 @@ public class HeatpumpRegistry {
 		return getInstance().getHeatpumpInteractor();
 	}
 
-	@SuppressWarnings("unchecked")
 	private HeatpumpInteractor getHeatpumpInteractor() throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-		return (HeatpumpInteractor) mainClass.getConstructor(new Class[]{}).newInstance(new Object[]{});
+		return mainClass.getConstructor(new Class[]{}).newInstance(new Object[]{});
 	}
 
 }
